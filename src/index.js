@@ -3,30 +3,50 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Marques from './components/Marques';
 import Cars from './components/Cars';
 import NewCar from './components/NewCar';
-import NotFound from './components/NotFound';
+import Car from './components/Car';
 import Marque from './components/Marque';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import ErrorPage from './components/ErrorPage';
 
-const MyApp = () => (
-  <Router>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="marques/:name" element={<Marque />} />
-      <Route path="marques" element={<Marques />} />
-      <Route path="cars" element={<Cars />} />
-      <Route path="cars/new" element={<NewCar />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  </Router>
-)
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/marques",
+    element: <Marques />
+  },
+  {
+    path: "/marques/:name",
+    element: <Marque />
+  },
+  {
+    path: "/cars",
+    element: <Cars />,
+    children: [
+      {
+        path: "/cars/new",
+        element: <NewCar />
+      },
+      {
+        path: "/cars/:model",
+        element: <Car />
+      }
+    ]
+  }
+])
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <MyApp />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

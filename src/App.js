@@ -11,6 +11,7 @@ function App() {
         <li><Link to="/marques/alfa">Alfa Romeo</Link></li>
         <li><Link to="/cars">Les voitures</Link></li>
         <li><Link to="/cars/new">Création d'une voiture</Link></li>
+        <li><Link to="/cars/Tonale">Alfa Romeo Tonale</Link></li>
       </ul>
     </>
   );
